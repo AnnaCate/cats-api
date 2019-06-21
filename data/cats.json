@@ -1,0 +1,47 @@
+[
+    {
+        "id": "tabby",
+        "type": "breed",
+        "description": "Tabbies are neat."
+    },
+    {        
+        "id": "calico",
+        "type": "breed",
+        "description": "calico are ok."
+    },
+    {
+        "id": "tortoise",
+        "type": "breed",
+        "description": "Tortoise cats are pretty."
+    },
+    {
+        "id": "roxy",
+        "type": "cat",
+        "name": "Roxy",
+        "breed": "tabby",
+        "owner": "Anna",
+        "age": 13,
+        "isDeceased": true,
+        "vaccinations": ["rabies", "cat flu"]
+    },
+    {
+        "id": "dark-kitty",
+        "type": "cat",
+        "name": "Dark Kitty",
+        "breed": "tortoise",
+        "owner": "Dana",
+        "age": 10,
+        "isDeceased": true,
+        "vaccinations": ["rabies"]
+    },
+    {
+        "id": "abby",
+        "type": "cat",
+        "name": "Abby",
+        "breed": "calico",
+        "owner": "Dana",
+        "age": 9,
+        "isDeceased": true,
+        "vaccinations": ["rabies"]
+    }
+]
