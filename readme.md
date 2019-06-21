@@ -89,7 +89,6 @@ Request Headers
 | Header       | Required | Type   | Description                         |
 | ------------ | -------- | ------ | ----------------------------------- |
 | Content-Type | true     | string | Media type. Ex: 'application/json'. |
-|              |          |        |                                     |
 
 Request Body
 
