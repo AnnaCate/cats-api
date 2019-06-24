@@ -5,6 +5,9 @@ const catsDatabase = require('./data/cats.json')
 const bodyParser = require('body-parser')
 const sluggo = require('./lib/sluggo')
 
+const cors = require('cors')
+app.use(cors())
+
 // tell express to use on every request this fn that's good at parsing json bodies
 app.use(bodyParser.json())
 
