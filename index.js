@@ -3,7 +3,9 @@ const express = require('express')
 const app = express()
 const catsDatabase = require('./data/cats.json')
 const bodyParser = require('body-parser')
+const sluggo = require('./lib/sluggo')
 
+// tell express to use on every request this fn that's good at parsing json bodies
 app.use(bodyParser.json())
 
 app.get('/', (req, res) => {
@@ -25,7 +27,13 @@ app.get('/cats', (req, res) => {
 
 // get cat by id using req.params
 app.get('/cats/:catId', (req, res) => {
-  res.status(200).send(catsDatabase.find(item => item.id === req.params.catId))
+  res
+    .status(200)
+    .send(
+      catsDatabase.find(
+        item => item.type === 'cat' && item.id === req.params.catId
+      )
+    )
 })
 
 // get breeds & allow for query on id, using req.query
@@ -45,7 +53,22 @@ app.get('/breeds', (req, res) => {
 app.get('/breeds/:breedId', (req, res) => {
   res
     .status(200)
-    .send(catsDatabase.find(item => item.id === req.params.breedId))
+    .send(
+      catsDatabase.find(
+        item => item.type === 'breed' && item.id === req.params.breedId
+      )
+    )
+})
+
+// post new cat
+app.post('/cats', (req, res) => {
+  const catToAdd = req.body
+
+  catToAdd.type = 'cat'
+  catToAdd.id = sluggo(catToAdd.name)
+  catsDatabase.push(catToAdd)
+
+  res.status(201).send({id: catToAdd.id, ok: true})
 })
 
 app.listen(process.env.PORT || 5555, process.env.HOST || '127.0.0.1', () => {
