@@ -10,7 +10,7 @@ app.get('/', (req, res) => {
   res.status(200).send('Welcome to all the cats. Meow.')
 })
 
-// get cats & allow for query on breeds
+// get cats & allow for query on breeds, using req.query
 app.get('/cats', (req, res) => {
   res
     .status(200)
@@ -23,9 +23,29 @@ app.get('/cats', (req, res) => {
     )
 })
 
-// get breeds
+// get cat by id using req.params
+app.get('/cats/:catId', (req, res) => {
+  res.status(200).send(catsDatabase.find(item => item.id === req.params.catId))
+})
+
+// get breeds & allow for query on id, using req.query
 app.get('/breeds', (req, res) => {
-  res.status(200).send(catsDatabase.filter(item => item.type === 'breed'))
+  res
+    .status(200)
+    .send(
+      catsDatabase.filter(
+        req.query.id
+          ? item => item.type === 'breed' && item.id === req.query.id
+          : item => item.type === 'breed'
+      )
+    )
+})
+
+// get breed by id using req.params
+app.get('/breeds/:breedId', (req, res) => {
+  res
+    .status(200)
+    .send(catsDatabase.find(item => item.id === req.params.breedId))
 })
 
 app.listen(process.env.PORT || 5555, process.env.HOST || '127.0.0.1', () => {
