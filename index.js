@@ -71,6 +71,19 @@ app.post('/cats', (req, res) => {
   res.status(201).send({id: catToAdd.id, ok: true})
 })
 
+// delete a cat
+app.delete('/cats/:id', (req, res) => {
+  const catToDelete = catsDatabase.findIndex(
+    item => item.type === 'cat' && item.id === req.params.id
+  )
+  if (catToDelete >= 0) {
+    catsDatabase.splice(catToDelete, 1)
+    res.status(200).send({id: req.params.id, deleted: true})
+  } else {
+    res.status(405).send({id: req.params.id, deleted: false})
+  }
+})
+
 app.listen(process.env.PORT || 5555, process.env.HOST || '127.0.0.1', () => {
   console.log("I'm up and listening on http://127.0.0.1:5555")
 })
